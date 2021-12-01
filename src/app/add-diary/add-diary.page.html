@@ -1,0 +1,221 @@
+<ion-content>
+  <ion-text>
+    <h1 style="color:white;font-weight:bold; margin: 20px;" text-center> New Collin Diary</h1>
+  </ion-text>
+
+  <!-- Parent Row for 5 cent section. -->
+  <ion-row>
+
+    <!-- First Column -->
+    <ion-col size="3" text-center>
+      <ion-row>
+        <img src="/assets/img/5Cent.jpg" />
+      </ion-row>
+      <ion-row>
+        5 Cent
+      </ion-row>
+    </ion-col>
+
+    <!-- Second Column -->
+    <ion-col size="2" text-center>
+      <ion-row>
+        Piece:
+      </ion-row>
+      <ion-row>
+        Total:
+      </ion-row>
+    </ion-col>
+
+    <!-- Third Column -->
+    <ion-col size="2" text-center>
+      <ion-row>
+        <ion-button (click)="increment5CentPiece()" expand="block" color="light">+</ion-button>
+      </ion-row>
+    </ion-col>
+
+    <!-- Fourth Column -->
+    <ion-col size="3" text-center>
+      <ion-row>
+        <ion-input (ionChange)="update5CentPiece($event.target.value)" type="number" value="{{pieceInput05}}">
+        </ion-input>
+      </ion-row>
+      <ion-row>
+        <ion-label>
+          RM {{ totalValue05 | number:'1.2-2' }}
+        </ion-label>
+      </ion-row>
+    </ion-col>
+
+    <!-- Fifth Column -->
+    <ion-col size="2" text-center>
+      <ion-row>
+        <ion-button (click)="decrement5CentPiece()" expand="block" color="light">-</ion-button>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+  <!-- Parent Row for 10 cent section. -->
+  <ion-row>
+
+    <!-- First Column -->
+    <ion-col size="3" text-center>
+      <ion-row>
+        <img src="/assets/img/10Cent.jpg" />
+      </ion-row>
+      <ion-row>
+        10 Cent
+      </ion-row>
+    </ion-col>
+
+    <!-- Second Column -->
+    <ion-col size="2" text-center>
+      <ion-row>
+        Piece:
+      </ion-row>
+      <ion-row>
+        Total:
+      </ion-row>
+    </ion-col>
+
+    <!-- Third Column -->
+    <ion-col size="2" text-center>
+      <ion-row>
+        <ion-button (click)="increment10CentPiece()" expand="block" color="light">+</ion-button>
+      </ion-row>
+    </ion-col>
+
+    <!-- Fourth Column -->
+    <ion-col size="3" text-center>
+      <ion-row>
+        <ion-input (ionChange)="update10CentPiece($event.target.value)" type="number" value="{{pieceInput10}}">
+        </ion-input>
+      </ion-row>
+      <ion-row>
+        <ion-label>
+          RM {{ totalValue10 | number:'1.2-2' }}
+        </ion-label>
+      </ion-row>
+    </ion-col>
+
+    <!-- Fifth Column -->
+    <ion-col size="2">
+      <ion-row>
+        <ion-button (click)="decrement10CentPiece()" expand="block" color="light">-</ion-button>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+   <!-- Parent Row for 20 cent section. -->
+   <ion-row>
+
+    <!-- First Column -->
+    <ion-col size="3" text-center>
+      <ion-row>
+        <img src="/assets/img/20Cent.jpg" />
+      </ion-row>
+      <ion-row>
+        20 Cent
+      </ion-row>
+    </ion-col>
+
+    <!-- Second Column -->
+    <ion-col size="2" text-center>
+      <ion-row>
+        Piece:
+      </ion-row>
+      <ion-row>
+        Total:
+      </ion-row>
+    </ion-col>
+
+    <!-- Third Column -->
+    <ion-col size="2" text-center>
+      <ion-row>
+        <ion-button (click)="increment20CentPiece()" expand="block" color="light">+</ion-button>
+      </ion-row>
+    </ion-col>
+
+    <!-- Fourth Column -->
+    <ion-col size="3" text-center>
+      <ion-row>
+        <ion-input (ionChange)="update20CentPiece($event.target.value)" type="number" value="{{pieceInput20}}">
+        </ion-input>
+      </ion-row>
+      <ion-row>
+        <ion-label>
+          RM {{ totalValue20 | number:'1.2-2' }}
+        </ion-label>
+      </ion-row>
+    </ion-col>
+
+    <!-- Fifth Column -->
+    <ion-col size="2">
+      <ion-row>
+        <ion-button (click)="decrement20CentPiece()" expand="block" color="light">-</ion-button>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+  <!-- Parent Row for 50 cent section. -->
+  <ion-row>
+
+    <!-- First Column -->
+    <ion-col size="3" text-center>
+      <ion-row>
+        <img src="/assets/img/50Cent.jpg" />
+      </ion-row>
+      <ion-row>
+        50 Cent
+      </ion-row>
+    </ion-col>
+
+    <!-- Second Column -->
+    <ion-col size="2" text-center>
+      <ion-row>
+        Piece:
+      </ion-row>
+      <ion-row>
+        Total:
+      </ion-row>
+    </ion-col>
+
+    <!-- Third Column -->
+    <ion-col size="2" text-center>
+      <ion-row>
+        <ion-button (click)="increment50CentPiece()" expand="block" color="light">+</ion-button>
+      </ion-row>
+    </ion-col>
+
+    <!-- Fourth Column -->
+    <ion-col size="3" text-center>
+      <ion-row>
+        <ion-input (ionChange)="update50CentPiece($event.target.value)" type="number" value="{{pieceInput50}}">
+        </ion-input>
+      </ion-row>
+      <ion-row>
+        <ion-label>
+          RM {{ totalValue50 | number:'1.2-2' }}
+        </ion-label>
+      </ion-row>
+    </ion-col>
+
+    <!-- Fifth Column -->
+    <ion-col size="2">
+      <ion-row>
+        <ion-button (click)="decrement50CentPiece()" expand="block" color="light">-</ion-button>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+  <!-- Total on that day -->
+  <ion-row>
+    <ion-col size="8">
+      Total for {{ todayDateDisplay() }}: 
+    </ion-col>
+    <ion-col size="4">
+      <ion-label>
+        RM {{totalForDateValue | number:'1.2-2'}}
+      </ion-label>
+    </ion-col>
+  </ion-row>
+</ion-content>
