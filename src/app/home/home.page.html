@@ -12,14 +12,32 @@
     <ion-col size="12" text-center>
       <ion-row>
         <ion-col size="12" text-center>
-          <ion-button (click)="goToAddDiaryPage()" expand="block" color="dark" style="margin-bottom:30px" ><ion-icon name="add-outline"></ion-icon>Collin Diary</ion-button>
+          <ion-button (click)="goToAddDiaryPage()" expand="block" color="dark" style="margin-bottom:30px">
+            <ion-icon name="add-outline"></ion-icon>Collin Diary
+          </ion-button>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col size="12">
-          <ion-button (click)="goToHistoryPage()" expand="block" color="dark" >Collin History</ion-button>
+          <ion-button (click)="goToHistoryPage()" expand="block" color="dark" style="margin-bottom:30px">Collin History
+          </ion-button>
         </ion-col>
       </ion-row>
+      <div class="container">
+        <ion-col size="9" text-center>
+          <ion-row>
+            <ion-item>
+              <ion-label>Please choose your language:</ion-label>
+              <ion-select>
+                <ion-select-option *ngFor="let lang of languages" [value]="lang.name">{{lang.name}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-row>
+          <ion-row></ion-row>
+        </ion-col>
+      </div>
     </ion-col>
   </div>
+
 </ion-content>

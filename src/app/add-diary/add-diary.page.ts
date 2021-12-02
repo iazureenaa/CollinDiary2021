@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import * as moment from 'moment';
 
 @Component({
@@ -21,7 +22,12 @@ export class AddDiaryPage implements OnInit {
   totalUntilDateValue = 0.00;
   
 
-  constructor() { }
+  constructor(public navCntrl: NavController) { }
+
+  goToHomePage()
+    {
+      this.navCntrl.navigateBack('/home');
+    }
 
   ngOnInit() {
   }

@@ -9,6 +9,12 @@ import { NavController } from '@ionic/angular';
 export class HomePage {
 
   constructor(public navCntrl: NavController) {}
+
+  languages = [
+    {"name":"Malay"},
+    {"name":"English"}
+  ]
+
   goToAddDiaryPage()
     {
       this.navCntrl.navigateForward('/add-diary');
