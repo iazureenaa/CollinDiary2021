@@ -67,7 +67,7 @@ export class DbService {
       .catch(e => console.log(e));
       return this.getAllRecords();
   }
-  async deleteToDo(date: Date) {
+  async deleteCollin(date: Date) {
     this.database.executeSql('DELETE FROM TODO WHERE DATE(now)', [date])
       .catch(e => console.log(e));
       return this.getAllRecords();

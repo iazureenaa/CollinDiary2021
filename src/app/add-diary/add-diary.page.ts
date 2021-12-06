@@ -12,7 +12,6 @@ export class AddDiaryPage implements OnInit {
 
   collins: CollinInterface[];
 
-
   pieceInput05 = 0;
   pieceInput10 = 0;
   pieceInput20 = 0;
@@ -29,15 +28,24 @@ export class AddDiaryPage implements OnInit {
   constructor(public navCntrl: NavController, private dbService: DbService) { }
 
   ionViewDidEnter() {
-    this.todayDate = Date();
+    this.todayDate = "";
     this.dbService.getAllCollins().then(data => this.collins = data);
   }
 
-  addCollin(date: string) {
-    this.dbService.addCollin(this.pieceInput05, this.pieceInput10, this.pieceInput20, this.pieceInput50).then(data => {
+  addCollin(noOf5cent, noO10cent, noOf20cent, noOf50cent) {
+    this.dbService.addCollin(noOf5cent, noO10cent, noOf20cent, noOf50cent).then(data => {
       this.collins = data;
-      this.todayDate = "";
     });
+  }
+
+  updateCollin(date: Date) {
+    this.dbService.updateCollin(date)
+      .then(data => this.collins = data);
+  }
+
+  deleteCollin(date: Date) {
+    this.dbService.deleteCollin(date)
+      .then(data => this.collins = data);
   }
 
   goToHomePage() {
