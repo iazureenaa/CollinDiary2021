@@ -34,14 +34,15 @@
 }
 
 .hr {
-    border-bottom: 3px solid black;
-    margin: 10px;
-    width: 90%;
+    border-bottom: 3px solid white;
+    margin-bottom: 30px;
+    width: 95%;
+    text-align: center;
   }
 
 .transaction-statements {
-    border: solid 1px black;
+    border: solid 1px;
     margin: 15px;
-    border-radius: 20px !important;
+    border-radius: 10px !important;
     text-align: center;
 }

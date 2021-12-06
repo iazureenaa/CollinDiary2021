@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import * as moment from 'moment';
+import { DbService, CollinInterface } from '../services/db.service';
 
 @Component({
   selector: 'app-add-diary',
@@ -8,6 +9,9 @@ import * as moment from 'moment';
   styleUrls: ['./add-diary.page.scss'],
 })
 export class AddDiaryPage implements OnInit {
+
+  collins: CollinInterface[];
+
 
   pieceInput05 = 0;
   pieceInput10 = 0;
@@ -22,7 +26,18 @@ export class AddDiaryPage implements OnInit {
   totalUntilDateValue = 0.00;
   
 
-  constructor(public navCntrl: NavController) { }
+  constructor(public navCntrl: NavController, private dbService: DbService) { }
+
+//   ionViewDidEnter() {
+//     this.todayDate = "";
+//     this.dbService.getAllCollins().then(data => this.collins = data);
+//   }
+//  addCollin(date: string) {
+//     this.dbService.addCollin(date).then(data => {
+//       this.collins = data;
+//       this.todayDate = "";
+//     });
+//   }
 
   goToHomePage()
     {

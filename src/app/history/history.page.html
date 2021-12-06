@@ -6,17 +6,23 @@
   <!-- Date Selection section -->
   <ion-row>
     <ion-col size="12">
-      <!-- <ion-label>Date:</ion-label> -->
-      <!-- <li-ionic4-datepicker [(ngModel)]="myDate" [liIonic4Datepicker]="datePickerObj"></li-ionic4-datepicker> -->
-      <ion-input readonly [(ngModel)]="myDate" [liIonic4Datepicker]="datePickerObj">
-      </ion-input>
+      <ion-row>
+        <ion-text>
+          Please select your date:
+        </ion-text>
+      </ion-row>
+      <ion-row>
+        <!-- <li-ionic4-datepicker [(ngModel)]="myDate" [liIonic4Datepicker]="datePickerObj"></li-ionic4-datepicker> -->
+      <!-- <ion-input readonly [(ngModel)]="myDate" [liIonic4Datepicker]="datePickerObj"> </ion-input>-->
+      <li-ionic4-datepicker [(ngModel)]="mydate" [inputDateConfig]="datePickerObj"></li-ionic4-datepicker>
+      </ion-row>
     </ion-col>
     <ion-col size="2"></ion-col>
     <ion-col size="2"></ion-col>
     <ion-col size="2"></ion-col>
   </ion-row>
-  <div class="hr"> </div>
-  
+  <!-- <div class="hr"> </div> -->
+
   <!-- Total on selected day -->
   <ion-row text-center>
     <ion-col size="7">
@@ -36,19 +42,19 @@
     </ion-item>
   </ion-col>
 
-    <!-- Credit-->
-    <ion-col size="12">
-      <ion-item class="transaction-statements">
-        <ion-text>Credit:</ion-text>
-      </ion-item>
-    </ion-col>
+  <!-- Credit-->
+  <ion-col size="12">
+    <ion-item class="transaction-statements">
+      <ion-text>Credit:</ion-text>
+    </ion-item>
+  </ion-col>
 
-     <!-- No Transaction-->
-     <ion-col size="12">
-      <ion-item class="transaction-statements">
-        <ion-text>No Transaction</ion-text>
-      </ion-item>
-    </ion-col>
+  <!-- No Transaction-->
+  <ion-col size="12">
+    <ion-item class="transaction-statements">
+      <ion-text>No Transaction</ion-text>
+    </ion-item>
+  </ion-col>
 
   <!-- Save and back buttons section. -->
   <ion-row>

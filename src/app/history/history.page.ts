@@ -9,7 +9,7 @@ import { Ionic4DatepickerModalComponent } from '@logisticinfotech/ionic4-datepic
 })
 export class HistoryPage implements OnInit {
 
-  myDate = 'Select date:';
+  myDate = 'Date:';
   datePickerObj: any = {
     mondayFirst: true
   };

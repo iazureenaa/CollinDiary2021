@@ -23,20 +23,18 @@
           </ion-button>
         </ion-col>
       </ion-row>
-      <div class="container">
-        <ion-col size="9" text-center>
-          <ion-row>
-            <ion-item>
-              <ion-label>Please choose your language:</ion-label>
-              <ion-select>
-                <ion-select-option *ngFor="let lang of languages" [value]="lang.name">{{lang.name}}
-                </ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-row>
-          <ion-row></ion-row>
-        </ion-col>
-      </div>
+      <ion-col size="12">
+        <ion-row>
+          <ion-item>
+            <ion-label>Language:</ion-label>
+            <ion-select>
+              <ion-select-option *ngFor="let lang of languages" [value]="lang.name">{{lang.name}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-row>
+        <ion-row></ion-row>
+      </ion-col>
     </ion-col>
   </div>
 
