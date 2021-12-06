@@ -21,33 +21,33 @@ export class AddDiaryPage implements OnInit {
   totalValue10 = 0.00;
   totalValue20 = 0.00;
   totalValue50 = 0.00;
-  todayDate="";
+  todayDate = "";
   totalForDateValue = 0.00;
   totalUntilDateValue = 0.00;
-  
+
 
   constructor(public navCntrl: NavController, private dbService: DbService) { }
 
-//   ionViewDidEnter() {
-//     this.todayDate = "";
-//     this.dbService.getAllCollins().then(data => this.collins = data);
-//   }
-//  addCollin(date: string) {
-//     this.dbService.addCollin(date).then(data => {
-//       this.collins = data;
-//       this.todayDate = "";
-//     });
-//   }
+  ionViewDidEnter() {
+    this.todayDate = Date();
+    this.dbService.getAllCollins().then(data => this.collins = data);
+  }
 
-  goToHomePage()
-    {
-      this.navCntrl.navigateBack('/home');
-    }
+  addCollin(date: string) {
+    this.dbService.addCollin(this.pieceInput05, this.pieceInput10, this.pieceInput20, this.pieceInput50).then(data => {
+      this.collins = data;
+      this.todayDate = "";
+    });
+  }
+
+  goToHomePage() {
+    this.navCntrl.navigateBack('/home');
+  }
 
   ngOnInit() {
   }
 
-  todayDateDisplay () {
+  todayDateDisplay() {
     return moment().format("Do MMM YYYY");
   }
 
@@ -74,7 +74,7 @@ export class AddDiaryPage implements OnInit {
   decrement10CentPiece() {
     this.pieceInput10--;
   }
-  
+
   decrement20CentPiece() {
     this.pieceInput20--;
   }
@@ -83,22 +83,22 @@ export class AddDiaryPage implements OnInit {
     this.pieceInput50--;
   }
 
-  autoCalculateTotal5Cent () {
+  autoCalculateTotal5Cent() {
     this.totalValue05 = (this.pieceInput05 * 5) / 100;
     this.autoCalculateGrandTotalForDate();
   }
 
-  autoCalculateTotal10Cent () {
+  autoCalculateTotal10Cent() {
     this.totalValue10 = (this.pieceInput10 * 10) / 100;
     this.autoCalculateGrandTotalForDate();
   }
 
-  autoCalculateTotal20Cent () {
+  autoCalculateTotal20Cent() {
     this.totalValue20 = (this.pieceInput20 * 20) / 100;
     this.autoCalculateGrandTotalForDate();
   }
 
-  autoCalculateTotal50Cent () {
+  autoCalculateTotal50Cent() {
     this.totalValue50 = (this.pieceInput50 * 50) / 100;
     this.autoCalculateGrandTotalForDate();
   }
@@ -117,7 +117,7 @@ export class AddDiaryPage implements OnInit {
     this.pieceInput20 = newValue;
     this.autoCalculateTotal20Cent();
   }
-  
+
   update50CentPiece(newValue) {
     this.pieceInput50 = newValue;
     this.autoCalculateTotal50Cent();
