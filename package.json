@@ -13,16 +13,22 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-devkit/architect": "^0.1300.4",
     "@angular/common": "~12.1.1",
     "@angular/core": "~12.1.1",
     "@angular/forms": "~12.1.1",
     "@angular/platform-browser": "~12.1.1",
     "@angular/platform-browser-dynamic": "~12.1.1",
     "@angular/router": "~12.1.1",
+    "@ionic-native/core": "^5.36.0",
+    "@ionic-native/globalization": "^5.36.0",
     "@ionic-native/sqlite": "^5.36.0",
     "@ionic/angular": "^5.5.2",
     "@logisticinfotech/ionic4-datepicker": "^1.4.4",
+    "@ngx-translate/core": "^14.0.0",
+    "@ngx-translate/http-loader": "^7.0.0",
     "cordova-browser": "^6.0.0",
+    "cordova-ios": "^5.1.1",
     "moment": "^2.29.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
@@ -78,7 +84,8 @@
       "cordova-plugin-ionic-keyboard": {}
     },
     "platforms": [
-      "browser"
+      "browser",
+      "ios"
     ]
   }
 }
