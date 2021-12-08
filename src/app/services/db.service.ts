@@ -25,15 +25,15 @@ export class DbService {
       (db) => {
         this.database = db;
         db.executeSql(`
-             CREATE TABLE IF NOT EXISTS (
-               date DATE PRIMARY KEY, 
-               totalUntilDate DOUBLE,
-               totalForDate DOUBLE,
-               noOf5cent INTEGER,
-               noOf10cent INTEGER,
-               noOf20cent INTEGER,
-               noOf50cent INTEGER,
-             )`, [])
+             CREATE TABLE IF NOT EXISTS ( 
+              + 'ADDIARY(date DATE PRIMARY KEY,' +               
+              'totalUntilDate DOUBLE,
+              totalForDate DOUBLE,
+              noOf5cent INTEGER,
+              noOf10cent INTEGER,
+              noOf20cent INTEGER,
+              noOf50cent INTEGER,)'
+ )`, [])
           .catch(e => console.log(e));
         collins = this.getAllRecords();
       }
@@ -47,7 +47,7 @@ export class DbService {
     let collins: CollinInterface[] = [];
     this.database.executeSql('select * from ADDDIARY', []).then(
       (res) => {
-        for(var x=0; x<res.rows.length; x++)
+        for (var x = 0; x < res.rows.length; x++)
           collins.push(res.rows.item(x));
       }
     ).catch(e => {
@@ -59,19 +59,19 @@ export class DbService {
   async addCollin(noOf5cent, noO10cent, noOf20cent, noOf50cent) {
     this.database.executeSql('insert into ADDDIARY(noOf5cent, noOf10cent, noOf20cent, noOf50cent) VALUES(?, ?, ?, ?)', [noOf5cent, 0])
       .catch(e => console.log(e));
-      return this.getAllRecords(); 
+    return this.getAllRecords();
   }
 
   async updateCollin(date: Date) {
     this.database.executeSql('UPDATE ADDDIARY WHERE DATE(now)', [date])
       .catch(e => console.log(e));
-      return this.getAllRecords();
+    return this.getAllRecords();
   }
   async deleteCollin(date: Date) {
     this.database.executeSql('DELETE FROM TODO WHERE DATE(now)', [date])
       .catch(e => console.log(e));
-      return this.getAllRecords();
+    return this.getAllRecords();
   }
-   
-  
+
+
 }

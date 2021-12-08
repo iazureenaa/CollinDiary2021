@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import * as moment from 'moment';
-import { DbService, CollinInterface } from '../services/db.service';
+// import { DbService, CollinInterface } from '../services/db.service';
 
 @Component({
   selector: 'app-add-diary',
@@ -10,7 +10,7 @@ import { DbService, CollinInterface } from '../services/db.service';
 })
 export class AddDiaryPage implements OnInit {
 
-  collins: CollinInterface[];
+  // collins: CollinInterface[];
 
   pieceInput05 = 0;
   pieceInput10 = 0;
@@ -25,28 +25,29 @@ export class AddDiaryPage implements OnInit {
   totalUntilDateValue = 0.00;
 
 
-  constructor(public navCntrl: NavController, private dbService: DbService) { }
+  // constructor(public navCntrl: NavController, private dbService: DbService) { }
+  constructor(public navCntrl: NavController) { }
 
-  ionViewDidEnter() {
-    this.todayDate = "";
-    this.dbService.getAllCollins().then(data => this.collins = data);
-  }
+  // ionViewDidEnter() {
+  //   this.todayDate = "";
+  //   this.dbService.getAllCollins().then(data => this.collins = data);
+  // }
 
-  addCollin(noOf5cent, noO10cent, noOf20cent, noOf50cent) {
-    this.dbService.addCollin(noOf5cent, noO10cent, noOf20cent, noOf50cent).then(data => {
-      this.collins = data;
-    });
-  }
+  // addCollin(noOf5cent, noO10cent, noOf20cent, noOf50cent) {
+  //   this.dbService.addCollin(noOf5cent, noO10cent, noOf20cent, noOf50cent).then(data => {
+  //     this.collins = data;
+  //   });
+  // }
 
-  updateCollin(date: Date) {
-    this.dbService.updateCollin(date)
-      .then(data => this.collins = data);
-  }
+  // updateCollin(date: Date) {
+  //   this.dbService.updateCollin(date)
+  //     .then(data => this.collins = data);
+  // }
 
-  deleteCollin(date: Date) {
-    this.dbService.deleteCollin(date)
-      .then(data => this.collins = data);
-  }
+  // deleteCollin(date: Date) {
+  //   this.dbService.deleteCollin(date)
+  //     .then(data => this.collins = data);
+  // }
 
   goToHomePage() {
     this.navCntrl.navigateBack('/home');
