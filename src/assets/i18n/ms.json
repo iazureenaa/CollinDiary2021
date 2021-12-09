@@ -2,15 +2,17 @@
     "App_Name": "Diari Collin",
     "Home_Menu_1": "Diari Collin",
     "Home_Menu_2": "Sejarah Collin",
-    "LABEL_1": "5 Sen",
-    "LABEL_2": "10 Sen",
-    "LABEL_3": "20 Sen",
-    "LABEL_4": "50 Sen",
-    "LABEL_5": "Keping",
-    "LABEL_6": "Jumlah",
-    "LABEL_7": "Jumlah pada",
-    "LABEL_8": "Jumlah sehingga",
-    "BUTTON_1": "Kembali",
-    "BUTTON_2": "Simpan"
+    "AddDiary_Title": "Diari Collin Baharu",
+    "Language": "Bahasa",
+    "Label_5Cent": "5 Sen",
+    "Label_10Cent": "10 Sen",
+    "Label_20Cent": "20 Sen",
+    "Label_50Cent": "50 Sen",
+    "Label_Piece": "Keping",
+    "Label_Total": "Jumlah",
+    "Label_Total_For": "Jumlah pada",
+    "Label_Total_Until": "Jumlah sehingga",
+    "Button_Back": "Kembali",
+    "Button_Save": "Simpan"
 }
 

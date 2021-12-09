@@ -14,7 +14,17 @@ import { TranslateService } from '@ngx-translate/core';
 export class AddDiaryPage implements OnInit {
 
   // collins: CollinInterface[];
-  public LABEL_5: string;
+  public Label_5Cent: string;
+  public Label_10Cent: string;
+  public Label_20Cent: string;
+  public Label_50Cent: string;
+  public Label_Piece: string;
+  public Label_Total: string;
+  public Label_Total_For: string;
+  public Label_Total_Until: string;
+  public Button_Back: string;
+  public Button_Save: string;
+  public AddDiary_Title: string;
 
   pieceInput05 = 0;
   pieceInput10 = 0;
@@ -57,15 +67,39 @@ export class AddDiaryPage implements OnInit {
   // }
 
   _initialiseTranslation(): void {
-    this._translate.get('LABEL_5').subscribe((res: string) => {
-      this.LABEL_5 = res;
+    this._translate.get('AddDiary_Title').subscribe((res: string) => {
+      this.AddDiary_Title = res;
     });
-      // this._translate.get('HOME_MENU_1').subscribe((res: string) => {
-      //   this.HOME_MENU_1 = res;
-      // });
-      // this._translate.get('HOME_MENU_2').subscribe((res: string) => {
-      //   this.HOME_MENU_2 = res;
-      // });
+    this._translate.get('Label_5Cent').subscribe((res: string) => {
+      this.Label_5Cent = res;
+    });
+      this._translate.get('Label_10Cent').subscribe((res: string) => {
+        this.Label_10Cent = res;
+      });
+      this._translate.get('Label_20Cent').subscribe((res: string) => {
+        this.Label_20Cent = res;
+      });
+      this._translate.get('Label_50Cent').subscribe((res: string) => {
+        this.Label_50Cent = res;
+      });
+      this._translate.get('Label_Piece').subscribe((res: string) => {
+        this.Label_Piece = res;
+      });
+      this._translate.get('Label_Total').subscribe((res: string) => {
+        this.Label_Total = res;
+      });
+      this._translate.get('Label_Total_For').subscribe((res: string) => {
+        this.Label_Total_For = res;
+      });
+      this._translate.get('Label_Total_Until').subscribe((res: string) => {
+        this.Label_Total_Until = res;
+      });
+      this._translate.get('Button_Back').subscribe((res: string) => {
+        this.Button_Back = res;
+      });
+      this._translate.get('Button_Save').subscribe((res: string) => {
+        this.Button_Save = res;
+      });
   }
 
   goToHomePage() {

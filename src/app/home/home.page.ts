@@ -13,6 +13,7 @@ export class HomePage {
   public App_Name: string;
   public Home_Menu_1: string;
   public Home_Menu_2: string;
+  public Language: string;
   language: string; //pilihan user
 
   constructor(public navCntrl: NavController, private globalization: Globalization, private _translate: TranslateService) {}
@@ -35,6 +36,9 @@ export class HomePage {
       });
       this._translate.get('Home_Menu_2').subscribe((res: string) => {
         this.Home_Menu_2 = res;
+      });
+      this._translate.get('Language').subscribe((res: string) => {
+        this.Language = res;
       });
   }
 

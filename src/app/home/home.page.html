@@ -26,7 +26,7 @@
       <ion-col size="12">
         <ion-row>
           <ion-item>
-            <ion-label>Language:</ion-label>
+            <ion-label>{{Language}}</ion-label>
             <ion-select [(ngModel)]="language" [value]="language" (ionChange)="changeLanguage()">
               <ion-select-option *ngFor="let lang of languages" [value]="lang.code">
                 {{lang.name}} {{lang.code}}

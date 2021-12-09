@@ -2,15 +2,17 @@
     "App_Name": "Collin Diary",
     "Home_Menu_1": "Collin Diary",
     "Home_Menu_2": "Collin History",
-    "LABEL_1": "5 Cent",
-    "LABEL_2": "10 Cent",
-    "LABEL_3": "20 Cent",
-    "LABEL_4": "50 Cent",
-    "LABEL_5": "Piece",
-    "LABEL_6": "Total",
-    "LABEL_7": "Total for",
-    "LABEL_8": "Total until",
-    "BUTTON_1": "Back",
-    "BUTTON_2": "Save"
+    "AddDiary_Title": "New Collin Diary",
+    "Language": "Language",
+    "Label_5Cent": "5 Cent",
+    "Label_10Cent": "10 Cent",
+    "Label_20Cent": "20 Cent",
+    "Label_50Cent": "50 Cent",
+    "Label_Piece": "Piece",
+    "Label_Total": "Total",
+    "Label_Total_For": "Total for",
+    "Label_Total_Until": "Total until",
+    "Button_Back": "Back",
+    "Button_Save": "Save"
     
 }
