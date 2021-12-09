@@ -11,12 +11,14 @@ import { TranslateService } from '@ngx-translate/core';
 export class HomePage {
 
   public HOME_MENU_1: string;
+  public HOME_MENU_2: string;
+  public APP_NAME: string;
   language: string; //pilihan user
 
   constructor(public navCntrl: NavController, private globalization: Globalization, private _translate: TranslateService) {}
 
   languages = [ //options yg boleh dipilih
-    {"name":"Malay", "code":"ms"},
+    {"name":"Malay", "code":"ms_MY"},
     {"name":"English", "code":"en-GB"}
   ]
 
@@ -25,8 +27,14 @@ export class HomePage {
   }
 
   _initialiseTranslation(): void {
+    this._translate.get('APP_NAME').subscribe((res: string) => {
+      this.APP_NAME = res;
+    });
       this._translate.get('HOME_MENU_1').subscribe((res: string) => {
         this.HOME_MENU_1 = res;
+      });
+      this._translate.get('HOME_MENU_2').subscribe((res: string) => {
+        this.HOME_MENU_2 = res;
       });
   }
 

@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Collin Diary
+      {{APP_NAME}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -19,7 +19,7 @@
       </ion-row>
       <ion-row>
         <ion-col size="12">
-          <ion-button (click)="goToHistoryPage()" expand="block" color="dark" style="margin-bottom:30px">Collin History
+          <ion-button (click)="goToHistoryPage()" expand="block" color="dark" style="margin-bottom:30px">{{HOME_MENU_2}}
           </ion-button>
         </ion-col>
       </ion-row>
@@ -28,7 +28,7 @@
           <ion-item>
             <ion-label>Language:</ion-label>
             <ion-select [(ngModel)]="language" [value]="language" (ionChange)="changeLanguage()">
-              <ion-select-option  *ngFor="let lang of languages" [value]="lang.code">
+              <ion-select-option *ngFor="let lang of languages" [value]="lang.code">
                 {{lang.name}} {{lang.code}}
               </ion-select-option>
             </ion-select>
