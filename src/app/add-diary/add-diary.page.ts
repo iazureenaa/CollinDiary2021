@@ -3,6 +3,9 @@ import { NavController } from '@ionic/angular';
 import * as moment from 'moment';
 // import { DbService, CollinInterface } from '../services/db.service';
 
+import { Globalization } from '@ionic-native/globalization/ngx';
+import { TranslateService } from '@ngx-translate/core';
+
 @Component({
   selector: 'app-add-diary',
   templateUrl: './add-diary.page.html',
@@ -11,6 +14,7 @@ import * as moment from 'moment';
 export class AddDiaryPage implements OnInit {
 
   // collins: CollinInterface[];
+  public LABEL_5: string;
 
   pieceInput05 = 0;
   pieceInput10 = 0;
@@ -26,7 +30,10 @@ export class AddDiaryPage implements OnInit {
 
 
   // constructor(public navCntrl: NavController, private dbService: DbService) { }
-  constructor(public navCntrl: NavController) { }
+  constructor(public navCntrl: NavController, private globalization: Globalization, private _translate: TranslateService) { 
+    this._translate.use("ms");
+    this._initialiseTranslation();
+  }
 
   // ionViewDidEnter() {
   //   this.todayDate = "";
@@ -48,6 +55,18 @@ export class AddDiaryPage implements OnInit {
   //   this.dbService.deleteCollin(date)
   //     .then(data => this.collins = data);
   // }
+
+  _initialiseTranslation(): void {
+    this._translate.get('LABEL_5').subscribe((res: string) => {
+      this.LABEL_5 = res;
+    });
+      // this._translate.get('HOME_MENU_1').subscribe((res: string) => {
+      //   this.HOME_MENU_1 = res;
+      // });
+      // this._translate.get('HOME_MENU_2').subscribe((res: string) => {
+      //   this.HOME_MENU_2 = res;
+      // });
+  }
 
   goToHomePage() {
     this.navCntrl.navigateBack('/home');

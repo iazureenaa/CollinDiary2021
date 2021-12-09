@@ -10,15 +10,15 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class HomePage {
 
-  public HOME_MENU_1: string;
-  public HOME_MENU_2: string;
-  public APP_NAME: string;
+  public App_Name: string;
+  public Home_Menu_1: string;
+  public Home_Menu_2: string;
   language: string; //pilihan user
 
   constructor(public navCntrl: NavController, private globalization: Globalization, private _translate: TranslateService) {}
 
   languages = [ //options yg boleh dipilih
-    {"name":"Malay", "code":"ms_MY"},
+    {"name":"Malay", "code":"ms"},
     {"name":"English", "code":"en-GB"}
   ]
 
@@ -27,14 +27,14 @@ export class HomePage {
   }
 
   _initialiseTranslation(): void {
-    this._translate.get('APP_NAME').subscribe((res: string) => {
-      this.APP_NAME = res;
+    this._translate.get('App_Name').subscribe((res: string) => {
+      this.App_Name = res;
     });
-      this._translate.get('HOME_MENU_1').subscribe((res: string) => {
-        this.HOME_MENU_1 = res;
+      this._translate.get('Home_Menu_1').subscribe((res: string) => {
+        this.Home_Menu_1 = res;
       });
-      this._translate.get('HOME_MENU_2').subscribe((res: string) => {
-        this.HOME_MENU_2 = res;
+      this._translate.get('Home_Menu_2').subscribe((res: string) => {
+        this.Home_Menu_2 = res;
       });
   }
 
@@ -61,6 +61,8 @@ export class HomePage {
   }
 
   getDeviceLanguage() {
+    console.log("test")
+    console.log(window.Intl);
     if (window.Intl && typeof window.Intl === 'object') {
       this._initTranslate(navigator.language)
     }
@@ -73,7 +75,6 @@ export class HomePage {
     }
   }
   
-
   goToAddDiaryPage()
   {
     this.navCntrl.navigateForward('/add-diary');

@@ -1,6 +1,16 @@
 {
-    "APP_NAME": "Collin Diary",
-    "HOME_MENU_1": "Collin Diary",
-    "HOME_MENU_2": "Collin History",
-    "LABEL_1": "Piece"
+    "App_Name": "Collin Diary",
+    "Home_Menu_1": "Collin Diary",
+    "Home_Menu_2": "Collin History",
+    "LABEL_1": "5 Cent",
+    "LABEL_2": "10 Cent",
+    "LABEL_3": "20 Cent",
+    "LABEL_4": "50 Cent",
+    "LABEL_5": "Piece",
+    "LABEL_6": "Total",
+    "LABEL_7": "Total for",
+    "LABEL_8": "Total until",
+    "BUTTON_1": "Back",
+    "BUTTON_2": "Save"
+    
 }
