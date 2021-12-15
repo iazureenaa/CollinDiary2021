@@ -7,10 +7,11 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-//plugins
+//plugins SQLite
 import { SQLite } from '@ionic-native/sqlite/ngx';
-import { DbService } from './services/db.service';
+import { CollinDatabaseService } from './services/collin-database.service';
 
+// plugins i18n
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -34,7 +35,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     IonicModule.forRoot(), 
     AppRoutingModule],
-  providers: [SQLite, Globalization, DbService, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, HttpClient],
+  providers: [SQLite, CollinDatabaseService, Globalization, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, HttpClient],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

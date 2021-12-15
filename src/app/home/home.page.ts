@@ -15,17 +15,14 @@ export class HomePage {
   public Home_Menu_2: string;
   public Language: string;
   language: string; //pilihan user
-
+ 
   constructor(public navCntrl: NavController, private globalization: Globalization, private _translate: TranslateService) {}
 
+  // i18n functions
   languages = [ //options yg boleh dipilih
     {"name":"Malay", "code":"ms"},
     {"name":"English", "code":"en-GB"}
   ]
-
-  ionViewDidEnter(): void {
-    this.getDeviceLanguage()
-  }
 
   _initialiseTranslation(): void {
     this._translate.get('App_Name').subscribe((res: string) => {
@@ -65,7 +62,7 @@ export class HomePage {
   }
 
   getDeviceLanguage() {
-    console.log("test")
+    console.log("init language here")
     console.log(window.Intl);
     if (window.Intl && typeof window.Intl === 'object') {
       this._initTranslate(navigator.language)
@@ -78,7 +75,8 @@ export class HomePage {
         .catch(e => {console.log(e);});
     }
   }
-  
+ 
+  //navigate functions
   goToAddDiaryPage()
   {
     this.navCntrl.navigateForward('/add-diary');
