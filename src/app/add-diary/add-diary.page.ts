@@ -5,7 +5,8 @@ import * as moment from 'moment';
 
 import { Globalization } from '@ionic-native/globalization/ngx';
 import { TranslateService } from '@ngx-translate/core';
-import { CollinDatabaseService, CollinInterface } from '../services/collin-database.service';
+import { CollinDatabaseService, EntryDiaryInterface } from '../services/collin-database.service';
+import { dismiss } from '@ionic/core/dist/types/utils/overlays';
 
 @Component({
   selector: 'app-add-diary',
@@ -38,18 +39,22 @@ export class AddDiaryPage implements OnInit {
   todayDate = "";
   totalForDateValue = 0.00;
   totalUntilDateValue = 0.00;
+  noOfPiece = 0;
+  ref_piece_type_id = 0;
 
   collinInput: string;
-  collins: CollinInterface[];
+  collins: EntryDiaryInterface[];
 
-  constructor(public navCntrl: NavController, private globalization: Globalization, private _translate: TranslateService, private collinDatabaseService: CollinDatabaseService) { 
+  constructor(public navCntrl: NavController, private globalization: Globalization, private _translate: TranslateService, private collinDatabaseService: CollinDatabaseService) {
     this._translate.use("ms");
     this._initialiseTranslation();
   }
 
   ionViewDidEnter(): void {
     this.collinInput = "";
-    this.collinDatabaseService.getAllCollins().then(data => this.collins = data);
+    this.collinDatabaseService.initDb().then(() => {
+      this.collinDatabaseService.getAllRecords().then(data => this.collins = data)
+    });
   }
 
   // i18n functions
@@ -60,33 +65,33 @@ export class AddDiaryPage implements OnInit {
     this._translate.get('Label_5Cent').subscribe((res: string) => {
       this.Label_5Cent = res;
     });
-      this._translate.get('Label_10Cent').subscribe((res: string) => {
-        this.Label_10Cent = res;
-      });
-      this._translate.get('Label_20Cent').subscribe((res: string) => {
-        this.Label_20Cent = res;
-      });
-      this._translate.get('Label_50Cent').subscribe((res: string) => {
-        this.Label_50Cent = res;
-      });
-      this._translate.get('Label_Piece').subscribe((res: string) => {
-        this.Label_Piece = res;
-      });
-      this._translate.get('Label_Total').subscribe((res: string) => {
-        this.Label_Total = res;
-      });
-      this._translate.get('Label_Total_For').subscribe((res: string) => {
-        this.Label_Total_For = res;
-      });
-      this._translate.get('Label_Total_Until').subscribe((res: string) => {
-        this.Label_Total_Until = res;
-      });
-      this._translate.get('Button_Back').subscribe((res: string) => {
-        this.Button_Back = res;
-      });
-      this._translate.get('Button_Save').subscribe((res: string) => {
-        this.Button_Save = res;
-      });
+    this._translate.get('Label_10Cent').subscribe((res: string) => {
+      this.Label_10Cent = res;
+    });
+    this._translate.get('Label_20Cent').subscribe((res: string) => {
+      this.Label_20Cent = res;
+    });
+    this._translate.get('Label_50Cent').subscribe((res: string) => {
+      this.Label_50Cent = res;
+    });
+    this._translate.get('Label_Piece').subscribe((res: string) => {
+      this.Label_Piece = res;
+    });
+    this._translate.get('Label_Total').subscribe((res: string) => {
+      this.Label_Total = res;
+    });
+    this._translate.get('Label_Total_For').subscribe((res: string) => {
+      this.Label_Total_For = res;
+    });
+    this._translate.get('Label_Total_Until').subscribe((res: string) => {
+      this.Label_Total_Until = res;
+    });
+    this._translate.get('Button_Back').subscribe((res: string) => {
+      this.Button_Back = res;
+    });
+    this._translate.get('Button_Save').subscribe((res: string) => {
+      this.Button_Save = res;
+    });
   }
 
   // navigate functions
@@ -186,11 +191,15 @@ export class AddDiaryPage implements OnInit {
 
     // so we saw got in db service
 
+    let row = { date: this.todayDate, no_of_piece: this.noOfPiece, ref_piece_type_id: this.ref_piece_type_id}
     // now we will test our diagnosis, if cure method is accurate
-    this.collinDatabaseService.addCollin(this.pieceInput05, this.pieceInput10, this.pieceInput20, this.pieceInput50).then(data => {
+    this.collinDatabaseService.insert("entry_diary", row).then(data => {
       this.collins = data;
       this.collinInput = "";
     });
+    console.log('Collins data:' + this.collins);
+    // window.location.reload();
+
   }
 
   deleteCollin(id: number) {
@@ -202,4 +211,8 @@ export class AddDiaryPage implements OnInit {
     this.collinDatabaseService.updateCollin(id)
       .then(data => this.collins = data);
   }
+
+  // doRefresh(event) {
+  //   console.log('Begin async operation');
+  // }
 }
