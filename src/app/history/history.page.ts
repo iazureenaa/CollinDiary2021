@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavController } from '@ionic/angular';
-import { Ionic4DatepickerModalComponent } from '@logisticinfotech/ionic4-datepicker';
+
+import { Ionic4DatepickerModalComponent } from '@logisticinfotech/ionic4-datepicker';import { Globalization } from '@ionic-native/globalization/ngx';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-history',
@@ -15,7 +17,40 @@ export class HistoryPage implements OnInit {
   };
   selectedDate;
 
-  constructor(public modalCtrl: ModalController, public navCntrl: NavController) { }
+  // var for i18n
+  public Total_Balance: string;
+  public Select_Date: string;
+  public Debit: string;
+  public Credit: string;
+  public No_Transaction: string;
+  public Button_Back: string;
+
+  constructor(public modalCtrl: ModalController, public navCntrl: NavController, private globalization: Globalization, private _translate: TranslateService) { 
+    this._translate.use("ms");
+    this._initialiseTranslation();
+  }
+
+  _initialiseTranslation(): void {
+    this._translate.get('Select_Date').subscribe((res: string) => {
+      this.Select_Date = res;
+    });
+    this._translate.get('Total_Balance').subscribe((res: string) => {
+      this.Total_Balance = res;
+    });
+    this._translate.get('Debit').subscribe((res: string) => {
+      this.Debit = res;
+    });
+    this._translate.get('Credit').subscribe((res: string) => {
+      this.Credit = res;
+    });
+    this._translate.get('No_Transaction').subscribe((res: string) => {
+      this.No_Transaction = res;
+    });
+    this._translate.get('Button_Back').subscribe((res: string) => {
+      this.Button_Back = res;
+    });
+  }
+
   goToHomePage()
   {
     this.navCntrl.navigateBack('/home');

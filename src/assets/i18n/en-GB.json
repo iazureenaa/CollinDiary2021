@@ -13,6 +13,10 @@
     "Label_Total_For": "Total for",
     "Label_Total_Until": "Total until",
     "Button_Back": "Back",
-    "Button_Save": "Save"
-    
+    "Button_Save": "Save",
+    "Total_Balance": "Total Balance",
+    "Select_Date": "Please select your date",
+    "Debit": "Debit",
+    "Credit": "Credit",
+    "No_Transaction": "No transaction"
 }

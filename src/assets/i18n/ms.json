@@ -13,6 +13,11 @@
     "Label_Total_For": "Jumlah pada",
     "Label_Total_Until": "Jumlah sehingga",
     "Button_Back": "Kembali",
-    "Button_Save": "Simpan"
+    "Button_Save": "Simpan",
+    "Total_Balance": "Jumlah Baki",
+    "Select_Date": "Sila pilih tarikh anda",
+    "Debit": "Debit",
+    "Credit": "Kredit",
+    "No_Transaction": "Tiada transaksi"
 }
 
