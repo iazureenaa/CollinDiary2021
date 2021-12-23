@@ -23,8 +23,9 @@
           </ion-button>
         </ion-col>
       </ion-row>
-      <ion-col size="12">
+
         <ion-row>
+          <ion-col size="12">
           <ion-item>
             <ion-label>{{Language}}</ion-label>
             <ion-select [(ngModel)]="language" [value]="language" (ionChange)="changeLanguage()">
@@ -33,9 +34,8 @@
               </ion-select-option>
             </ion-select>
           </ion-item>
+        </ion-col>
         </ion-row>
-        <ion-row></ion-row>
-      </ion-col>
     </ion-col>
   </div>
 
