@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavController } from '@ionic/angular';
 
-import { Ionic4DatepickerModalComponent } from '@logisticinfotech/ionic4-datepicker';import { Globalization } from '@ionic-native/globalization/ngx';
+import { Ionic4DatepickerModalComponent } from '@logisticinfotech/ionic4-datepicker';
+import { Globalization } from '@ionic-native/globalization/ngx';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -10,10 +11,9 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./history.page.scss'],
 })
 export class HistoryPage implements OnInit {
-
   myDate = 'Date:';
   datePickerObj: any = {
-    mondayFirst: true
+    mondayFirst: true,
   };
   selectedDate;
 
@@ -25,8 +25,19 @@ export class HistoryPage implements OnInit {
   public No_Transaction: string;
   public Button_Back: string;
 
-  constructor(public modalCtrl: ModalController, public navCntrl: NavController, private globalization: Globalization, private _translate: TranslateService) { 
-    this._translate.use("ms");
+  no_of_piece = 0;
+  cent_value = 0;
+  total_Debit = 0;
+  total_Credit = 0;
+  no_Transaction = false;
+
+  constructor(
+    public modalCtrl: ModalController,
+    public navCntrl: NavController,
+    private globalization: Globalization,
+    private _translate: TranslateService
+  ) {
+    this._translate.use('ms');
     this._initialiseTranslation();
   }
 
@@ -51,13 +62,12 @@ export class HistoryPage implements OnInit {
     });
   }
 
-  goToHomePage()
-  {
+  goToHomePage() {
     this.navCntrl.navigateBack('/home');
   }
   ngOnInit() {
     this.datePickerObj = {
-      dateFormat: 'YYYY-MM-DD'
+      dateFormat: 'YYYY-MM-DD',
     };
   }
 
@@ -66,18 +76,35 @@ export class HistoryPage implements OnInit {
       component: Ionic4DatepickerModalComponent,
       cssClass: 'li-ionic4-datePicker',
       componentProps: {
-        'objConfig': this.datePickerObj,
-        'selectedDate': this.selectedDate
-      }
+        objConfig: this.datePickerObj,
+        selectedDate: this.selectedDate,
+      },
     });
     await datePickerModal.present();
 
-    datePickerModal.onDidDismiss()
-      .then((data) => {
-        console.log(data);
-        this.selectedDate = data.data.date;
-      });
+    datePickerModal.onDidDismiss().then((data) => {
+      console.log(data);
+      this.selectedDate = data.data.date;
+    });
   }
 
-}
+  // logic calculation functions
 
+  totalDebit() {
+    if (this.no_of_piece < 0) {
+      this.total_Debit = this.no_of_piece * this.cent_value;
+    }
+  }
+
+  totalCredit() {
+    if (this.no_of_piece > 0) {
+      this.total_Credit = this.no_of_piece * this.cent_value;
+    }
+  }
+
+  noTransaction() {
+    if (this.total_Debit == 0 && this.total_Credit == 0) {
+      this.no_Transaction = true;
+    }
+  }
+}
