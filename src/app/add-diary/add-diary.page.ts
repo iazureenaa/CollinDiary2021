@@ -5,8 +5,12 @@ import * as moment from 'moment';
 
 import { Globalization } from '@ionic-native/globalization/ngx';
 import { TranslateService } from '@ngx-translate/core';
-import { CollinDatabaseService, EntryDiaryInterface } from '../services/collin-database.service';
+import {
+  CollinDatabaseService,
+  EntryDiaryInterface,
+} from '../services/collin-database.service';
 import { dismiss } from '@ionic/core/dist/types/utils/overlays';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-add-diary',
@@ -14,7 +18,6 @@ import { dismiss } from '@ionic/core/dist/types/utils/overlays';
   styleUrls: ['./add-diary.page.scss'],
 })
 export class AddDiaryPage implements OnInit {
-
   // collins: CollinInterface[];
   public Label_5Cent: string;
   public Label_10Cent: string;
@@ -32,28 +35,36 @@ export class AddDiaryPage implements OnInit {
   pieceInput10 = 0;
   pieceInput20 = 0;
   pieceInput50 = 0;
-  totalValue05 = 0.00;
-  totalValue10 = 0.00;
-  totalValue20 = 0.00;
-  totalValue50 = 0.00;
-  todayDate = "";
-  totalForDateValue = 0.00;
-  totalUntilDateValue = 0.00;
+  totalValue05 = 0.0;
+  totalValue10 = 0.0;
+  totalValue20 = 0.0;
+  totalValue50 = 0.0;
+  todayDate = '';
+  totalForDateValue = 0.0;
+  totalUntilDateValue = 0.0;
   noOfPiece = 0;
   ref_piece_type_id = 0;
 
   collinInput: string;
   collins: EntryDiaryInterface[];
 
-  constructor(public navCntrl: NavController, private globalization: Globalization, private _translate: TranslateService, private collinDatabaseService: CollinDatabaseService) {
-    this._translate.use("ms");
+  constructor(
+    public navCntrl: NavController,
+    private globalization: Globalization,
+    private _translate: TranslateService,
+    private collinDatabaseService: CollinDatabaseService,
+    public toastCtrl: ToastController
+  ) {
+    this._translate.use('ms');
     this._initialiseTranslation();
   }
 
   ionViewDidEnter(): void {
-    this.collinInput = "";
+    this.collinInput = '';
     this.collinDatabaseService.initDb().then(() => {
-      this.collinDatabaseService.getAllRecords().then(data => this.collins = data)
+      this.collinDatabaseService
+        .getAllRecords()
+        .then((data) => (this.collins = data));
     });
   }
 
@@ -99,12 +110,11 @@ export class AddDiaryPage implements OnInit {
     this.navCntrl.navigateBack('/home');
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   // logic calculation functions
   todayDateDisplay() {
-    return moment().format("Do MMM YYYY");
+    return moment().format('Do MMM YYYY');
   }
 
   increment5CentPiece() {
@@ -180,39 +190,53 @@ export class AddDiaryPage implements OnInit {
   }
 
   autoCalculateGrandTotalForDate() {
-    this.totalForDateValue = this.totalValue05 + this.totalValue10 + this.totalValue20 + this.totalValue50;
+    this.totalForDateValue =
+      this.totalValue05 +
+      this.totalValue10 +
+      this.totalValue20 +
+      this.totalValue50;
   }
 
   // sqlite functions
-  addCollin() { // this is function param, it will expect some data assignment. so need to check function caller, in our case function caller is in html
+  addCollin() {
+    // this is function param, it will expect some data assignment. so need to check function caller, in our case function caller is in html
     //here we check further any noOf5Cent variable declared or not in other function. xde and only located in our function definition.
     //now we use our another dev friend, -> project finder. ctrl+shift+f
     //here we search what does noOf5cent meant to be used by dev?
 
     // so we saw got in db service
 
-    let row = { date: this.todayDate, no_of_piece: this.noOfPiece, ref_piece_type_id: this.ref_piece_type_id}
+    let row = {
+      date: this.todayDate,
+      no_of_piece: this.noOfPiece,
+      ref_piece_type_id: this.ref_piece_type_id,
+    };
     // now we will test our diagnosis, if cure method is accurate
-    this.collinDatabaseService.insert("entry_diary", row).then(data => {
+    this.collinDatabaseService.insert('entry_diary', row).then((data) => {
       this.collins = data;
-      this.collinInput = "";
+      this.collinInput = '';
     });
     console.log('Collins data:' + this.collins);
     // window.location.reload();
-
   }
 
   deleteCollin(id: number) {
-    this.collinDatabaseService.deleteCollin(id)
-      .then(data => this.collins = data);
+    this.collinDatabaseService
+      .deleteCollin(id)
+      .then((data) => (this.collins = data));
   }
 
   updateCollin(id: number) {
-    this.collinDatabaseService.updateCollin(id)
-      .then(data => this.collins = data);
+    this.collinDatabaseService
+      .updateCollin(id)
+      .then((data) => (this.collins = data));
   }
 
-  // doRefresh(event) {
-  //   console.log('Begin async operation');
-  // }
+  async openToast() {
+    const toast = await this.toastCtrl.create({
+      message: 'You data is saved.',
+      duration: 4000,
+    });
+    toast.present();
+  }
 }

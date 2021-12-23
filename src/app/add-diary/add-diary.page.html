@@ -241,7 +241,7 @@
       <!--by using our good developer friend, ctrl+f, it shows in html there is no other variable noOf5cent used elsewhere. so now we have to move to ts file-->
       <!--back to function caller, we need to modify as this param is definitely null because no data assignment/calculation happen prior to that-->
       <!--in our knowledge, we already have existing angular variable we created for our inputs. lets use that instead-->
-      <ion-button (click)="addCollin()" expand="block" color="dark" style="margin-bottom:30px" >{{Button_Save}}</ion-button>
+      <ion-button (click)="addCollin(); openToast()" expand="block" color="dark" style="margin-bottom:30px" >{{Button_Save}}</ion-button>
     </ion-col>
   </ion-row>
 </ion-content>
