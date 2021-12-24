@@ -25,10 +25,10 @@
 
   <!-- Total on selected day -->
   <ion-row text-center>
-    <ion-col size="7">
+    <ion-col size="4">
       {{Total_Balance}}:
     </ion-col>
-    <ion-col size="5">
+    <ion-col size="8">
       <ion-label>
         RM {{totalForDateValue | number:'1.2-2'}}
       </ion-label>
@@ -38,7 +38,7 @@
   <!-- Debit-->
  <ion-row>
   <ion-col size="12">
-    <ion-item class="transaction-statements">
+    <ion-item class="transaction-statements" [color]="this.total_Debit_Cond == true ? 'danger' : 'light'"> 
       <ion-text>{{Debit}}: RM {{total_Debit}}</ion-text>
     </ion-item>
   </ion-col>
@@ -46,7 +46,7 @@
 
   <!-- Credit-->
   <ion-col size="12">
-    <ion-item class="transaction-statements">
+    <ion-item class="transaction-statements" [color]="this.total_Credit_Cond == true ? 'primary' : 'light'">
       <ion-text>{{Credit}}: RM {{total_Credit}}</ion-text>
     </ion-item>
   </ion-col>

@@ -27,9 +27,12 @@ export class HistoryPage implements OnInit {
 
   no_of_piece = 0;
   cent_value = 0;
-  total_Debit = 0;
-  total_Credit = 0;
-  no_Transaction = false;
+  total_Debit_Value = 0;
+  total_Credit_Value = 0;
+
+  total_Credit_Cond = true;
+  total_Debit_Cond = true;
+  no_Transaction = true;
 
   constructor(
     public modalCtrl: ModalController,
@@ -92,18 +95,20 @@ export class HistoryPage implements OnInit {
 
   totalDebit() {
     if (this.no_of_piece < 0) {
-      this.total_Debit = this.no_of_piece * this.cent_value;
+      this.total_Debit_Value = this.no_of_piece * this.cent_value;
+      this.total_Debit_Cond = true;
     }
   }
 
   totalCredit() {
     if (this.no_of_piece > 0) {
-      this.total_Credit = this.no_of_piece * this.cent_value;
+      this.total_Credit_Value = this.no_of_piece * this.cent_value;
+      this.total_Credit_Cond = true;
     }
   }
 
   noTransaction() {
-    if (this.total_Debit == 0 && this.total_Credit == 0) {
+    if (this.total_Debit_Value == 0 && this.total_Credit_Value == 0) {
       this.no_Transaction = true;
     }
   }
