@@ -30,6 +30,7 @@ export class AddDiaryPage implements OnInit {
   public Button_Back: string;
   public Button_Save: string;
   public AddDiary_Title: string;
+  public Data_Is_Saved: string;
 
   pieceInput05 = 0;
   pieceInput10 = 0;
@@ -55,7 +56,7 @@ export class AddDiaryPage implements OnInit {
     private collinDatabaseService: CollinDatabaseService,
     public toastCtrl: ToastController
   ) {
-    this._translate.use('ms');
+    // this._translate.use('ms');
     this._initialiseTranslation();
   }
 
@@ -102,6 +103,9 @@ export class AddDiaryPage implements OnInit {
     });
     this._translate.get('Button_Save').subscribe((res: string) => {
       this.Button_Save = res;
+    });
+    this._translate.get('Data_Is_Saved').subscribe((res: string) => {
+      this.Data_Is_Saved = res;
     });
   }
 
@@ -234,7 +238,7 @@ export class AddDiaryPage implements OnInit {
 
   async openToast() {
     const toast = await this.toastCtrl.create({
-      message: 'You data is saved.',
+      message: this.Data_Is_Saved,
       duration: 4000,
     });
     toast.present();

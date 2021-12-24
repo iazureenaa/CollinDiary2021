@@ -40,7 +40,7 @@ export class HistoryPage implements OnInit {
     private globalization: Globalization,
     private _translate: TranslateService
   ) {
-    this._translate.use('ms');
+    // this._translate.use('ms');
     this._initialiseTranslation();
   }
 

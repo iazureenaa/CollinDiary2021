@@ -18,5 +18,6 @@
     "Select_Date": "Please select your date",
     "Debit": "Debit",
     "Credit": "Credit",
-    "No_Transaction": "No transaction"
+    "No_Transaction": "No transaction",
+    "Data_Is_Saved": "You data is saved."
 }
