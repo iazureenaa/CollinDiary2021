@@ -40,14 +40,22 @@ export class AddDiaryPage implements OnInit {
   totalValue10 = 0.0;
   totalValue20 = 0.0;
   totalValue50 = 0.0;
-  todayDate = '';
+  todayDate = moment().format('YYYYMMDD'); // get today's date
   totalForDateValue = 0.0;
   totalUntilDateValue = 0.0;
-  noOfPiece = 0;
+  no_of_piece = 0;
   ref_piece_type_id = 0;
+  cent_value = 0;
 
   collinInput: string;
   collins: EntryDiaryInterface[];
+  database: any;
+  //ref_piece_type: any;
+
+  idFor05Cent;
+  idFor10Cent;
+  idFor20Cent;
+  idFor50Cent;
 
   constructor(
     public navCntrl: NavController,
@@ -63,9 +71,32 @@ export class AddDiaryPage implements OnInit {
   ionViewDidEnter(): void {
     this.collinInput = '';
     this.collinDatabaseService.initDb().then(() => {
+      // first, find if there are any data from the database for current date
+      // call db service to get the data for todayDate
       this.collinDatabaseService
-        .getAllRecords()
+        .getDataForSelectedDate(this.todayDate)
         .then((data) => (this.collins = data));
+      // TODO: Put await
+      this.idFor05Cent = this.collinDatabaseService.selectIdFromTableWithFilter(
+        '05cent',
+        'name',
+        'ref_piece_type'
+      );
+      this.idFor10Cent = this.collinDatabaseService.selectIdFromTableWithFilter(
+        '10cent',
+        'name',
+        'ref_piece_type'
+      );
+      this.idFor20Cent = this.collinDatabaseService.selectIdFromTableWithFilter(
+        '20cent',
+        'name',
+        'ref_piece_type'
+      );
+      this.idFor50Cent = this.collinDatabaseService.selectIdFromTableWithFilter(
+        '50cent',
+        'name',
+        'ref_piece_type'
+      );
     });
   }
 
@@ -116,7 +147,7 @@ export class AddDiaryPage implements OnInit {
 
   ngOnInit() {}
 
-  // logic calculation functions
+  // FE date display
   todayDateDisplay() {
     return moment().format('Do MMM YYYY');
   }
@@ -201,33 +232,81 @@ export class AddDiaryPage implements OnInit {
       this.totalValue50;
   }
 
+  autoCalculateGrandTotalUntilDate() {
+    if (this.todayDate <= this.todayDate) {
+      this.totalUntilDateValue = this.no_of_piece * this.cent_value;
+    }
+  }
+
   // sqlite functions
   addCollin() {
     // this is function param, it will expect some data assignment. so need to check function caller, in our case function caller is in html
     //here we check further any noOf5Cent variable declared or not in other function. xde and only located in our function definition.
     //now we use our another dev friend, -> project finder. ctrl+shift+f
     //here we search what does noOf5cent meant to be used by dev?
-
-    // so we saw got in db service
-
-    let row = {
-      date: this.todayDate,
-      no_of_piece: this.noOfPiece,
-      ref_piece_type_id: this.ref_piece_type_id,
-    };
+    let data = [
+      {
+        date: this.todayDate,
+        no_of_piece: this.pieceInput05,
+        ref_piece_type_id: this.idFor05Cent,
+      },
+      {
+        date: this.todayDate,
+        no_of_piece: this.pieceInput10,
+        ref_piece_type_id: this.idFor10Cent,
+      },
+      {
+        date: this.todayDate,
+        no_of_piece: this.pieceInput20,
+        ref_piece_type_id: this.idFor20Cent,
+      },
+      {
+        date: this.todayDate,
+        no_of_piece: this.pieceInput50,
+        ref_piece_type_id: this.idFor50Cent,
+      },
+    ];
     // now we will test our diagnosis, if cure method is accurate
-    this.collinDatabaseService.insert('entry_diary', row).then((data) => {
-      this.collins = data;
-      this.collinInput = '';
+    // this.collinDatabaseService.insert('entry_diary', rows).then((data) => {
+    //   this.getAllCollins();
+    //   this.collins = data;
+    //   this.collinInput = '';
+    // });
+    data.forEach(async (row) => {
+      await this.collinDatabaseService
+        .insert('entry_diary', row)
+        .then((data) => {
+          this.getAllCollins();
+          this.collins = data;
+          this.collinInput = '';
+        });
     });
+
     console.log('Collins data:' + this.collins);
     // window.location.reload();
+
+    // so we saw got in db service
   }
 
+  async getAllCollins() {
+    this.collinDatabaseService.select('entry_diary').then((data) => {
+      // make scoreList = empty array first before pushing data from "select" result.
+      // otherwise it will keep adding to existing data which causes front-end to show repeated rows.
+      // this.scoreList = [];
+      for (var i = 0; i < data.rows.length; i++) {
+        console.log(
+          `id: ${data.rows.item(i).id}, 
+          date: ${data.rows.item(i).date}, 
+          no_of_piece: ${data.rows.item(i).no_of_piece}, 
+          ref_piece_type_id: ${data.rows.item(i).ref_piece_type_id}`
+        );
+      }
+    });
+  }
+
+  // call delete collin record function with given id
   deleteCollin(id: number) {
-    this.collinDatabaseService
-      .deleteCollin(id)
-      .then((data) => (this.collins = data));
+    this.collinDatabaseService.delete(id).then((data) => (this.collins = data));
   }
 
   updateCollin(id: number) {

@@ -50,7 +50,7 @@ export class CollinDatabaseService {
             .executeSql(
               'CREATE TABLE IF NOT EXISTS ' +
                 'ref_piece_type(id INTEGER PRIMARY KEY AUTOINCREMENT,' +
-                ' name TEXT, cent_value INTEGER, image_url TEXT, modified_dt TEXT, type TEXT)',
+                ' name TEXT NOT NULL UNIQUE, cent_value INTEGER, image_url TEXT, modified_dt TEXT, type TEXT)',
               []
             )
             .then(() => console.log('ref_piece_type table has been created.'))
@@ -126,20 +126,13 @@ export class CollinDatabaseService {
         console.log(e);
       });
     // TODO: check if result.rows exist before for loop
+    // loop through result.rows and push each row into the collin arrays
     for (var x = 0; x < result.rows.length; x++) {
       collins.push(result.rows.item(x));
     }
 
     return collins;
   }
-
-  // async addCollin(noOfPiece: number, ref_piece_type_id: number) {
-  //   let data = [noOfPiece, ref_piece_type_id];
-
-  //   this.database.executeSql('insert into entry_diary(date, noOfPiece, ref_piece_type_id) VALUES(?, ?, ?)', data)
-  //     .catch(e => console.log(e));
-  //   return this.getAllRecords();
-  // }
 
   // generic insert function, needs table name and records as an object
   async insert(tableName, records) {
@@ -169,20 +162,72 @@ export class CollinDatabaseService {
         return;
     }
 
-    return this.database.executeSql(sqlText, values);
+    return await this.database.executeSql(sqlText, values);
+  }
+
+  async select(tableName) {
+    let sqlText;
+    let values;
+    sqlText = `SELECT * from ${tableName}`;
+    return await this.database.executeSql(sqlText, values);
+  }
+
+  async selectIdFromTableWithFilter(columnValue, columnName, tableName) {
+    let id;
+    let sqlText;
+    let values;
+    sqlText = `SELECT id from ${tableName} where ${columnName} = ?`;
+    values = [columnValue.toString()];
+    let result = await this.database.executeSql(sqlText, values).catch((e) => {
+      console.log(e);
+    });
+    for (var x = 0; x < result.rows.length; x++) {
+      id = result.rows.item(x);
+    }
+    console.log('Result:' + id);
+
+    return id;
+  }
+
+  async selectForDate(tableName, date) {
+    // date parameter should be the value of date in YYYYMMDD format
+    let sqlText;
+    let values;
+    sqlText = `SELECT * from ${tableName} where date = ?`;
+    values = [date.toString()];
+    // example tableName = dbData and date = 20191107
+    // sqlText = "SELECT * from dbData where date = 20191107"
+    return await this.database.executeSql(sqlText, values);
   }
 
   async updateCollin(id: number) {
     this.database
       .executeSql('UPDATE entry_diary WHERE ID=?', [id])
       .catch((e) => console.log(e));
-    return this.getAllRecords();
+    return await this.getAllRecords();
   }
 
-  async deleteCollin(id: number) {
+  // delete the record with given id from db
+  async delete(id: number) {
     this.database
       .executeSql('DELETE FROM entry_diary WHERE ID=?', [id])
       .catch((e) => console.log(e));
     return this.getAllRecords();
+  }
+
+  // to get data for given date
+  async getDataForSelectedDate(date: string) {
+    let collins: EntryDiaryInterface[] = [];
+
+    let result = await this.database
+      .executeSql('select * from entry_diary WHERE date=?', [date])
+      .catch((e) => {
+        console.log(e);
+      });
+    for (var x = 0; x < result.rows.length; x++) {
+      collins.push(result.rows.item(x));
+    }
+
+    return collins;
   }
 }

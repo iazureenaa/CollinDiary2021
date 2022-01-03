@@ -15,6 +15,7 @@ export class HistoryPage implements OnInit {
   datePickerObj: any = {
     mondayFirst: true,
   };
+
   selectedDate;
 
   // var for i18n
@@ -29,6 +30,13 @@ export class HistoryPage implements OnInit {
   cent_value = 0;
   total_Debit_Value = 0;
   total_Credit_Value = 0;
+
+  date = '';
+  totalBalance = 0;
+  totalValue05 = 0.0;
+  totalValue10 = 0.0;
+  totalValue20 = 0.0;
+  totalValue50 = 0.0;
 
   total_Credit_Cond = true;
   total_Debit_Cond = true;
@@ -88,10 +96,21 @@ export class HistoryPage implements OnInit {
     datePickerModal.onDidDismiss().then((data) => {
       console.log(data);
       this.selectedDate = data.data.date;
+      this.totalBalanceSelectedDate();
     });
   }
 
   // logic calculation functions
+
+  totalBalanceSelectedDate() {
+    if (this.date == this.selectedDate) {
+      this.totalBalance =
+        this.totalValue05 +
+        this.totalValue10 +
+        this.totalValue20 +
+        this.totalValue50;
+    }
+  }
 
   totalDebit() {
     if (this.no_of_piece < 0) {
